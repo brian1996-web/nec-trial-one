@@ -4,9 +4,6 @@ const app = express(); // app creates an instance of express.
 const signup = require("./routes/signupRoutes.js"); //imports the signupRoutes into the server.js
 const login = require("./routes/loginRoutes.js");
 
-
-
-
 const crypto = require("crypto");
 global.crypto = crypto;
 
@@ -16,8 +13,7 @@ app.use(cors()); // ✅ Always call middleware functions
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // Parse JSON data
 
-app.use(express.json()); 
-
+app.use(express.json());
 
 app.use("/signup", signup);
 app.use("/login", login);
@@ -29,10 +25,13 @@ app.get("/", (req, res) => {
 // Connecting to the database
 mongoose
 
-  .connect("mongodb+srv://database-1:<data123>@cluster0.0kxi8.mongodb.net/WereDb?retryWrites=true&w=majority&appName=Cluster0 ", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://database-1:<data123>@cluster0.0kxi8.mongodb.net/database-1?retryWrites=true&w=majority&appName=Cluster0 ",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Connection Error:", err));
 
