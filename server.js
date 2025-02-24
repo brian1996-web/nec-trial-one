@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 mongoose
 
   .connect(
-    "mongodb+srv://database-1:<data123>@cluster0.0kxi8.mongodb.net/database-1?retryWrites=true&w=majority&appName=Cluster0 ",
+    "mongodb+srv://Brian:Brian@cluster0.0kxi8.mongodb.net/database-1?retryWrites=true&w=majority&appName=Cluster0",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
