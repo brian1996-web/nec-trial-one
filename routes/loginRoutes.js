@@ -8,13 +8,12 @@ const router = express.Router();
 // ✅ USER LOGIN
 router.post("/login", async (req, res) => {
   try {
-    console.log("Received login request:",req.body);
+    console.log("Received login request:", req.body);
     const { email, password } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
-    if (!user) 
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
