@@ -9,6 +9,7 @@ global.crypto = crypto;
 
 const cors = require("cors");
 app.use(cors()); // ✅ Always call middleware functions
+// require("dotenv").config(); // Make sure this line is at the top
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json()); // Parse JSON data
@@ -22,16 +23,27 @@ app.get("/", (req, res) => {
   res.send("hello brian my first time on render");
 });
 
-// Connecting to the database
-mongoose
+const dotenv = require("dotenv");
+dotenv.config();
 
-  .connect(
-    "mongodb+srv://Brian:Brian@cluster0.0kxi8.mongodb.net/database-1?retryWrites=true&w=majority&appName=Cluster0",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+
+// Connecting to the database
+require("dotenv").config();
+console.log("MONGO_URI:", process.env.MONGO_URI); // Debugging line
+
+const mongoURI = process.env.MONGO_URL; // Correct variable name
+
+if (!mongoURI) {
+  console.error("MONGO_URL is undefined. Check your .env file.");
+  process.exit(1); // Stop the server if the database URL is missing
+}
+
+
+mongoose
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Connection Error:", err));
 
@@ -39,7 +51,6 @@ require("dotenv").config();
 const port = process.env.PORT || 3001;
 const MONGO_URI = process.env.MONGO_URI;
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`The server is running at port ${PORT}`);
+app.listen(port, () => {
+  console.log(`The server is running at port ${port}`);
 });
