@@ -40,9 +40,8 @@ console.log("MONGO_URL:", process.env.MONGO_URI); // Debugging line
 
 
 mongoose
-  // .connect(mongoURI, {
-
-     .connect(process.env.MONGO_URL, {
+  .connect("mongodb+srv://Brian:Brian@cluster0.0kxi8.mongodb.net/database-1?retryWrites=true&w=majority&appName=Cluster0", {
+    //  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
