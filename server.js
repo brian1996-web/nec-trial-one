@@ -29,18 +29,20 @@ dotenv.config();
 
 // Connecting to the database
 require("dotenv").config();
-console.log("MONGO_URI:", process.env.MONGO_URI); // Debugging line
+console.log("MONGO_URL:", process.env.MONGO_URI); // Debugging line
 
-const mongoURI = process.env.MONGO_URL; // Correct variable name
+// const mongoURI = process.env.MONGO_URL; // Correct variable name
 
-if (!mongoURI) {
-  console.error("MONGO_URL is undefined. Check your .env file.");
-  process.exit(1); // Stop the server if the database URL is missing
-}
+// if (!mongoURI) {
+//   console.error("MONGO_URL is undefined. Check your .env file.");
+//   process.exit(1); // Stop the server if the database URL is missing
+// }
 
 
 mongoose
-  .connect(mongoURI, {
+  // .connect(mongoURI, {
+
+     .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
